@@ -20,16 +20,18 @@ app.get('/', (req, res) => {
       </head>
       <body>
         <div class="news-list">
-          <header><img src="/23px-Flag_of_Germany.svg.png"/>Germany Squad - 2014 FIFA World Cup Champion<img style="padding-left: 10px" src="/2014_FIFA_World_Cup.svg.png" id="wc2014logo" /></header>
+          <header style="font-size:30px"><img src="/23px-Flag_of_Germany.svg.png" id="deflag"/><img src="/germanynationalteamlogo.png" id="dfblogo"/>Germany Squad - 2014 FIFA World Cup Champion<img style="padding-left: 10px" src="/2014_FIFA_World_Cup.svg.png" id="wc2014logo" /></header>
           ${squad.map(player => `
             <div class='news-item'>
+              <a href='/players/${player.id}'>
               <p>
-                <span class="news-position"><font size="+2"><b>No. ${player.id}</b></font> ▲</span>${player.name}
-                <small>(${player.position})</small>
+                <span class="news-position"><font size="+2.8"><b>No. ${player.id}</b></font> ▲</span><font size="+0.8">${player.name}</font>
+                <small><b>(${player.position})</b></small>
               </p>
               <small class="news-info">
-              Date of Birth: ${player.dateOfBirth} | Age: ${player.age} | Club: ${player.club}
+              Date of Birth: ${player.dateOfBirth} | Age: ${player.age} | Club: ${player.club}<img src=${player.clubLogo} style="width:30px; vertical-align:middle" class="center">
               </small>
+              </a>
             </div>`
           ).join('')}
         </div>
@@ -54,10 +56,11 @@ app.get('/players/:id', (req, res) => {
           <div class="news-list">
           <header><img src="/23px-Flag_of_Germany.svg.png"/>Germany Squad - 2014 FIFA World Cup Champion<img style="padding-left: 10px" src="/2014_FIFA_World_Cup.svg.png" id="wc2014logo" /></header>
               <div class='news-item'>
+                <img src=${player.portait} alt=${player.name} style="height:180px"/>
                 <p>
                   <font size="+2"><b>No. ${player.id}</b></font>&ensp;
                   <span class="news-position">${player.name}</span>
-                  <small>(${player.position})</small>
+                  <small>(${player.position} | Caps: ${player.caps})</small>
                 </p>
                 <p>${player.club}</p>
               </div>
